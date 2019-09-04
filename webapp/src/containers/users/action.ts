@@ -8,12 +8,6 @@ export const createGridAction = (partialStateName: any, partialStateValue: any) 
     partialStateValue,
 });
 
-const loadData = async function (options: any) {
-    console.log('loadData......', options);
-    let { pageSize, currentPage } = options
-    const query: any = { top: pageSize, skip: currentPage * pageSize };
-    return (new DataSource.Users).getUsers(query)
-}
 
 export function loadUserData(options: any) {
     return function (dispatch: any) {
@@ -22,6 +16,13 @@ export function loadUserData(options: any) {
             (error) => dispatch(loadDataError(error)),
         );
     };
+}
+
+async function loadData(options: any) {
+    console.log('loadData......', options);
+    let { pageSize, currentPage } = options
+    const query: any = { top: pageSize, skip: currentPage * pageSize };
+    return (new DataSource.Users).getUsers(query)
 }
 
 function loadDataSauce(...args: any) {
