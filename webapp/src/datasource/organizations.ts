@@ -17,7 +17,7 @@ export class Organizations{
         }
         const baseQuery = Odata.ODataV4QueryProvider.createQuery<Entitys.Organization>(endpoint, requestInit);
 
-        const query = baseQuery.select('_id', 'name', 'fullname', 'children').top(options.top || 10).skip(options.skip || 0)
+        const query = baseQuery.select('_id', 'name', 'fullname', 'children').top(options.top || 10000).skip(options.skip || 0)
 
         let results = await query.getManyAsync();
 

@@ -15,6 +15,7 @@
     "@types/react": "^16.8.19",
     "@types/react-dom": "^16.8.4",
     "@types/react-redux": "^7.1.2",
+    "@types/underscore": "^1.9.2",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
     "react-redux": "^7.1.1",
@@ -22,7 +23,8 @@
     "redux": "^4.0.4",
     "redux-thunk": "^2.3.0",
     "ts-odata-client": "^1.0.2",
-    "typescript": "^3.6.2"
+    "typescript": "^3.6.2",
+    "underscore": "^1.9.1"
   },
   "scripts": {
     "start": "react-scripts start",
