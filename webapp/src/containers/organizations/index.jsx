@@ -4,9 +4,11 @@ import IconSettings from '@salesforce/design-system-react/components/icon-settin
 import Tree from '@salesforce/design-system-react/lib/components/tree/index.js';
 import log from '@salesforce/design-system-react/lib/utilities/log.js';
 import Search from '@salesforce/design-system-react/lib/components/forms/input/search.js';
-import {store} from './reducer'
+import store from '../../stores/configureStore'
 import { connect, Provider } from 'react-redux';
 import {createGridAction} from './action'
+import { getOrganizationsState } from './state'
+import { loadOrganizationsData } from './action'
 class Organizations extends React.Component {
 	static displayName = 'DemoTree';
 
@@ -14,11 +16,13 @@ class Organizations extends React.Component {
 		heading: 'Miscellaneous Foods',
 		id: 'example-tree',
 	};
-
 	componentDidMount() {
-        const { init } = this.props
-        console.log('init ', init);
-        init()
+		// console.log("componentDidMount this", this.props)
+		// const { init } = getOrganizationsState(this.props);
+		if(this.props.init){
+			console.log('init ', this.props.init);
+			this.props.init()
+		}
     }
 
 	state = {
@@ -31,10 +35,6 @@ class Organizations extends React.Component {
 		console.log("node...", node.nodes, (node.nodes ? node.nodes.map((id) => this.state.nodes[id]) : []));
 		return node.nodes ? node.nodes.map((id) => this.state.nodes[id]) : [];
 	}
-		
-		
-	
-		
 		
 
 	// By default Tree can have multiple selected nodes and folders/branches can be selected. To disable either of these, you can use the following logic. However, `props` are immutable. The node passed in shouldn't be modified. Object and arrays are reference variables.
@@ -142,9 +142,13 @@ class Organizations extends React.Component {
 	};
 
 	render() {
+
+		const {onExpandClick, onClick, onScroll} = this.props;
+		const {assistiveText, className, getNodes, noHeading, id, listStyle, listClassName, rootNodes, searchTerm} = getOrganizationsState(this.props);
+
 		return (
 			<IconSettings iconPath="/icons">
-				<div>
+				<div style={{width: 400}}>
 					{this.props.searchable ? (
 						<div>
 							<Search
@@ -157,19 +161,19 @@ class Organizations extends React.Component {
 						</div>
 					) : null}
 					<Tree
-						assistiveText={this.props.assistiveText}
-						className={this.props.className}
-						getNodes={this.props.getNodes || this.getNodes}
-						heading={!this.props.noHeading && this.props.heading}
-						id={this.props.id}
-						listStyle={this.props.listStyle}
-						listClassName={this.props.listClassName}
+						assistiveText={assistiveText}
+						className={className}
+						getNodes={getNodes || this.getNodes}
+						heading={!noHeading && this.props.heading}
+						id={id}
+						listStyle={listStyle}
+						listClassName={listClassName}
 						// nodes={this.state.nodes["0"].nodes}
-						nodes={this.state.rootNodes}
-						onExpandClick={this.props.onExpandClick || this.handleExpandClick}
-						onClick={this.props.onClick || this.handleClick}
-						onScroll={this.props.onScroll || this.handleScroll}
-						searchTerm={this.props.searchTerm || this.state.searchTerm}
+						nodes={rootNodes}
+						onExpandClick={onExpandClick || this.handleExpandClick}
+						onClick={onClick || this.handleClick}
+						onScroll={onScroll || this.handleScroll}
+						searchTerm={searchTerm || this.state.searchTerm}
 					/>
 				</div>
 			</IconSettings>
@@ -177,13 +181,15 @@ class Organizations extends React.Component {
 	}
 }
 
+// export default Organizations
+
 const mapStateToProps = (state) => state;
 
 const mapDispatchToProps = (dispatch) => ({
 	onExpandClick: (event, data) => dispatch(createGridAction('onExpandClick', data)),
-	onClick: (event, data) => dispatch(createGridAction('onClick', data))
+	onClick: (event, data) => dispatch(createGridAction('onClick', data)),
+    init: () => dispatch(loadOrganizationsData({}))
   });
-
 
 const ReduxOrganizationsContainer = connect(mapStateToProps, mapDispatchToProps)(Organizations);
 

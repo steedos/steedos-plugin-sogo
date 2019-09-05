@@ -9,7 +9,7 @@ export const createGridAction = (partialStateName: any, partialStateValue: any) 
 });
 
 
-export function loadUserData(options: any) {
+export function loadOrganizationsData(options: any) {
     console.log("loadUserData options", options)
     return function (dispatch: any) {
         return loadData(options).then(
@@ -28,23 +28,16 @@ async function loadData(options: any) {
 
 function loadDataSauce(...args: any) {
     console.log("loadDataSauce", args);
-    if (args.length === 0) {
-        return {
-            type: "LOADDATASAUCE",
-            records: [],
-            totalCount: 0
-        }
+    let records = []
+    let totalCount = 0
+    if (args.length > 0) {
+        records = args[0].value
+        totalCount = args[0]["@odata.count"]
     }
-    return {
-        type: "LOADDATASAUCE",
-        records: args[0].value,
-        totalCount: args[0]["@odata.count"]
-    }
+    return createGridAction('loadDataSauce', {records, totalCount})
 }
 
 function loadDataError(...args: any) {
     console.log("loadDataError", args);
-    return {
-        type: "LOADDATAERROR"
-    }
+    return createGridAction('loadDataError', {error: args})
 }

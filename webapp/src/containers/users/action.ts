@@ -1,15 +1,15 @@
 import * as DataSource from '../../datasource/users'
 
-export const GRID_STATE_CHANGE_ACTION = 'GRID_STATE_CHANGE';
+export const USERS_STATE_CHANGE_ACTION = 'USERS_STATE_CHANGE';
 
 export const createGridAction = (partialStateName: any, partialStateValue: any) => ({
-    type: GRID_STATE_CHANGE_ACTION,
+    type: USERS_STATE_CHANGE_ACTION,
     partialStateName,
     partialStateValue,
 });
 
 
-export function loadUserData(options: any) {
+export function loadUsersData(options: any) {
     return function (dispatch: any) {
         return loadData(options).then(
             (sauce) => dispatch(loadDataSauce(sauce)),
@@ -27,23 +27,16 @@ async function loadData(options: any) {
 
 function loadDataSauce(...args: any) {
     console.log("loadDataSauce", args);
-    if (args.length === 0) {
-        return {
-            type: "LOADDATASAUCE",
-            rows: [],
-            totalCount: 0
-        }
+    let records = []
+    let totalCount = 0
+    if (args.length > 0) {
+        records = args[0].value
+        totalCount = args[0]["@odata.count"]
     }
-    return {
-        type: "LOADDATASAUCE",
-        rows: args[0].value,
-        totalCount: args[0]["@odata.count"]
-    }
+    return createGridAction('loadDataSauce', {records, totalCount})
 }
 
 function loadDataError(...args: any) {
     console.log("loadDataError", args);
-    return {
-        type: "LOADDATAERROR"
-    }
+    return createGridAction('loadDataError', {error: args})
 }

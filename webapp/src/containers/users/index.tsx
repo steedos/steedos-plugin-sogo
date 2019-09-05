@@ -3,8 +3,8 @@ import { connect, Provider } from 'react-redux';
 
 import SteedosGrid from '../../components/grid';
 import {createGridAction} from './action'
-import {store} from './reducer'
-
+import store from '../../stores/configureStore'
+import { loadUsersData } from './action'
 
 const mapStateToProps = (state: any) => state;
 
@@ -19,6 +19,7 @@ const mapDispatchToProps = (dispatch: any) => ({
   onPageSizeChange: (pageSize: any) => dispatch(createGridAction('pageSize', pageSize)),
   onColumnOrderChange: (order: any) => dispatch(createGridAction('columnOrder', order)),
   onColumnWidthsChange: (widths: any) => dispatch(createGridAction('columnWidths', widths)),
+  init: () => dispatch(loadUsersData({}))
 });
 
 const ReduxGridContainer: any = connect(mapStateToProps, mapDispatchToProps)(SteedosGrid);

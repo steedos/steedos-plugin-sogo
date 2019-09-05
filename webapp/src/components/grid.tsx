@@ -1,5 +1,6 @@
 import * as React from 'react';
 import Paper from '@material-ui/core/Paper';
+import { getUsersState } from '../containers/users/state'
 
 import {
     SortingState, SelectionState, PagingState, RowDetailState,
@@ -14,10 +15,12 @@ import {
 
 class SteedosGrid extends React.Component {
     constructor(props: any) {
+        console.log("constructor constructor this.props", props);
         super(props)
     }
 
     componentDidMount() {
+        console.log("componentDidMount componentDidMount this.props", this.props);
         const { init } = this.props as any
         console.log('init ', init);
         init()
@@ -25,27 +28,28 @@ class SteedosGrid extends React.Component {
 
     render() {
         const {
+            onSortingChange,
+            onSelectionChange,
+            onExpandedRowIdsChange,
+            onCurrentPageChange,
+            onPageSizeChange,
+            onColumnOrderChange,
+            onColumnWidthsChange,
+        } = this.props as any
+        const {
             rows,
             sorting,
-            onSortingChange,
             selection,
-            onSelectionChange,
             expandedRowIds,
-            onExpandedRowIdsChange,
             currentPage,
-            onCurrentPageChange,
             pageSize,
-            onPageSizeChange,
             pageSizes,
             columnOrder,
-            onColumnOrderChange,
             columnWidths,
-            onColumnWidthsChange,
             totalCount,
             columns,
             getRowId
-        } = this.props as any
-
+        } = getUsersState(this.props)
         return (
             <Paper>
                 <Grid

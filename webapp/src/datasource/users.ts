@@ -10,7 +10,7 @@ export class Users{
         const requestInit = ()=>{
             return {
                 headers: {
-                    'X-Auth-Token': 'eyrVTOxWM_CHiXlOy6r2zWbGfkbvB6J7cRYC1T2bWQs',
+                    'X-Auth-Token': 'qeY7uk7tiifhDyElCDVKHEKrJndZJ5N1VCF6KZQYgkg',
                     'X-User-Id': '51a842c87046900538000001'
                 }
             }
@@ -20,8 +20,6 @@ export class Users{
         const query = baseQuery.select('_id', 'name', 'email', 'user', 'username', 'position', 'mobile').top(options.top || 10).skip(options.skip || 0)
 
         let results = await query.getManyAsync();
-
-        console.log('results', results);
 
         return results
     }
