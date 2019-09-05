@@ -1,12 +1,39 @@
 import * as DataSource from '../../datasource/users'
+import { getUsersState } from './state';
 
 export const USERS_STATE_CHANGE_ACTION = 'USERS_STATE_CHANGE';
 
-export const createGridAction = (partialStateName: any, partialStateValue: any) => ({
-    type: USERS_STATE_CHANGE_ACTION,
-    partialStateName,
-    partialStateValue,
-});
+export function createGridAction(partialStateName: any, partialStateValue: any) {
+    if(["currentPage", "pageSize"].includes(partialStateName)){
+        return function(dispatch: any, getState: any){
+            let usersState = getUsersState(getState());
+
+            let options: any = {}
+            if(partialStateName === 'currentPage'){
+                options.currentPage = partialStateValue
+                options.pageSize = usersState.pageSize
+            }else if(partialStateName === 'pageSize'){
+                options.currentPage = usersState.currentPage
+                options.pageSize = partialStateValue
+            }
+            loadData(options).then(
+                (sauce) => dispatch(loadDataSauce(sauce)),
+                (error) => dispatch(loadDataError(error)),
+            );
+            dispatch({
+                type: USERS_STATE_CHANGE_ACTION,
+                partialStateName,
+                partialStateValue,
+            })
+        }
+    }else{
+        return {
+            type: USERS_STATE_CHANGE_ACTION,
+            partialStateName,
+            partialStateValue,
+        }
+    }
+} 
 
 
 export function loadUsersData(options: any) {
