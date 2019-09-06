@@ -3,12 +3,12 @@ import Paper from '@material-ui/core/Paper';
 import { getUsersState } from '../containers/users/state'
 
 import {
-    SortingState, SelectionState, PagingState, RowDetailState,
+    SortingState, SelectionState, PagingState, RowDetailState,SearchState,IntegratedFiltering,
     IntegratedSorting, IntegratedSelection, CustomPaging
 } from '@devexpress/dx-react-grid';
 import {
     Grid, Table, TableHeaderRow,
-    TableSelection,
+    TableSelection,SearchPanel,
     PagingPanel, DragDropProvider, TableColumnReordering, TableColumnResizing, Toolbar,
 } from '@devexpress/dx-react-grid-material-ui';
 
@@ -35,6 +35,7 @@ class SteedosGrid extends React.Component {
             onPageSizeChange,
             onColumnOrderChange,
             onColumnWidthsChange,
+            onSearchValueChange
         } = this.props as any
         const {
             rows,
@@ -48,7 +49,8 @@ class SteedosGrid extends React.Component {
             columnWidths,
             totalCount,
             columns,
-            getRowId
+            getRowId,
+            searchValue
         } = getUsersState(this.props)
         return (
             <Paper>
@@ -57,7 +59,7 @@ class SteedosGrid extends React.Component {
                     columns={columns}
                     getRowId={getRowId}
                 >
-
+                    <SearchState value={searchValue} onValueChange={onSearchValueChange}/>
                     <SortingState
                         sorting={sorting}
                         onSortingChange={onSortingChange}
@@ -79,7 +81,7 @@ class SteedosGrid extends React.Component {
                         selection={selection}
                         onSelectionChange={onSelectionChange}
                     />
-
+                    <IntegratedFiltering />
                     <IntegratedSorting />
                     <IntegratedSelection />
 
@@ -96,9 +98,9 @@ class SteedosGrid extends React.Component {
                         order={columnOrder}
                         onOrderChange={onColumnOrderChange}
                     />
-
                     <TableSelection showSelectAll />
                     <Toolbar />
+                    <SearchPanel />
                     <PagingPanel
                         pageSizes={pageSizes}
                     />

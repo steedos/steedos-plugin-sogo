@@ -24,6 +24,8 @@ function transformData(records: any){
     return items;
 }
 
+
+//TODO: 优化onExpandClick，onClick
 function reducer(state:any = {}, action: any){
     if (action.type === ORGANIZATIONS__STATE_CHANGE_ACTION) {
 		console.log("organizations.reducer action", action, state)

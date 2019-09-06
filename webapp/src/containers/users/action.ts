@@ -4,8 +4,11 @@ import { getUsersState } from './state';
 export const USERS_STATE_CHANGE_ACTION = 'USERS_STATE_CHANGE';
 
 export function createGridAction(partialStateName: any, partialStateValue: any) {
-    if(["currentPage", "pageSize"].includes(partialStateName)){
+    if(["currentPage", "pageSize", "filters"].includes(partialStateName)){
         return function(dispatch: any, getState: any){
+
+            console.log("partialStateName", partialStateName);
+            console.log("partialStateValue", partialStateValue);
             let usersState = getUsersState(getState());
 
             let options: any = {}
@@ -15,7 +18,11 @@ export function createGridAction(partialStateName: any, partialStateValue: any) 
             }else if(partialStateName === 'pageSize'){
                 options.currentPage = usersState.currentPage
                 options.pageSize = partialStateValue
+            }else if(partialStateName === 'filters'){
+                options.filters = partialStateValue
             }
+
+
             loadData(options).then(
                 (sauce) => dispatch(loadDataSauce(sauce)),
                 (error) => dispatch(loadDataError(error)),
@@ -47,8 +54,8 @@ export function loadUsersData(options: any) {
 
 async function loadData(options: any) {
     console.log('loadData......', options);
-    let { pageSize, currentPage } = options
-    const query: any = { top: pageSize, skip: currentPage * pageSize };
+    let { pageSize, currentPage, filters } = options
+    const query: any = { top: pageSize, skip: currentPage * pageSize, filters: filters || [] };
     return (new DataSource.Users).getUsers(query)
 }
 

@@ -16,11 +16,13 @@ export class Users{
             }
         }
         const baseQuery = Odata.ODataV4QueryProvider.createQuery<Entitys.User>(endpoint, requestInit);
-
-        const query = baseQuery.select('_id', 'name', 'email', 'user', 'username', 'position', 'mobile').top(options.top || 10).skip(options.skip || 0)
-
+        let query = baseQuery.select('_id', 'name', 'email', 'user', 'username', 'position', 'mobile').top(options.top || 10).skip(options.skip || 0)
+        if(options.filters){
+            options.filters.forEach((element: any) => {
+                query = query.filter(p => p[element.operation](element.columnName, element.value));
+            });
+        }
         let results = await query.getManyAsync();
-
         return results
     }
 }

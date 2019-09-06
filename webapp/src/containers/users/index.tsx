@@ -19,6 +19,7 @@ const mapDispatchToProps = (dispatch: any) => ({
   onPageSizeChange: (pageSize: any) => dispatch(createGridAction('pageSize', pageSize)),
   onColumnOrderChange: (order: any) => dispatch(createGridAction('columnOrder', order)),
   onColumnWidthsChange: (widths: any) => dispatch(createGridAction('columnWidths', widths)),
+  onSearchValueChange: (widths: any) => dispatch(createGridAction('searchValue', widths)),
   init: () => dispatch(loadUsersData({}))
 });
 
