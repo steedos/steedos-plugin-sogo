@@ -1,3 +1,3 @@
-export * from './user'
+export * from './space_users'
 export * from './odata_results'
-export * from './organization'
+export * from './organizations'

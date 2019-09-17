@@ -1,4 +1,4 @@
-export interface Organization {
+export interface Organizations {
     _id: string,
     name: string,
     fullname: number,

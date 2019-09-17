@@ -23,7 +23,7 @@ async function loadData(options: any) {
     console.log('loadData......', options);
     let { pageSize, currentPage } = options
     const query: any = { top: pageSize, skip: currentPage * pageSize };
-    return (new DataSource.Organizations).getOrganizations(query)
+    return (new DataSource.Organizations).query(query)
 }
 
 function loadDataSauce(...args: any) {

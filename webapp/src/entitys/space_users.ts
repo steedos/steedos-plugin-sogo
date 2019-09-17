@@ -1,4 +1,4 @@
-export interface User {
+export interface spaceUsers {
     _id: string,
     name: string,
     email: number,

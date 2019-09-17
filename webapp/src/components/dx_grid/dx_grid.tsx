@@ -1,6 +1,5 @@
 import * as React from 'react';
 import Paper from '@material-ui/core/Paper';
-import { getUsersState } from '../containers/users/state'
 
 import {
     SortingState, SelectionState, PagingState, RowDetailState,SearchState,IntegratedFiltering,
@@ -13,7 +12,7 @@ import {
 } from '@devexpress/dx-react-grid-material-ui';
 
 
-class SteedosGrid extends React.Component {
+class SteedosDXGrid extends React.Component {
     constructor(props: any) {
         console.log("constructor constructor this.props", props);
         super(props)
@@ -22,21 +21,10 @@ class SteedosGrid extends React.Component {
     componentDidMount() {
         console.log("componentDidMount componentDidMount this.props", this.props);
         const { init } = this.props as any
-        console.log('init ', init);
-        init()
+        init(this.props)
     }
 
     render() {
-        const {
-            onSortingChange,
-            onSelectionChange,
-            onExpandedRowIdsChange,
-            onCurrentPageChange,
-            onPageSizeChange,
-            onColumnOrderChange,
-            onColumnWidthsChange,
-            onSearchValueChange
-        } = this.props as any
         const {
             rows,
             sorting,
@@ -50,8 +38,16 @@ class SteedosGrid extends React.Component {
             totalCount,
             columns,
             getRowId,
-            searchValue
-        } = getUsersState(this.props)
+            searchValue,
+            onSortingChange,
+            onSelectionChange,
+            onExpandedRowIdsChange,
+            onCurrentPageChange,
+            onPageSizeChange,
+            onColumnOrderChange,
+            onColumnWidthsChange,
+            onSearchValueChange
+        } = this.props as any
         return (
             <Paper>
                 <Grid
@@ -110,4 +106,4 @@ class SteedosGrid extends React.Component {
     }
 }
 
-export default SteedosGrid
+export default SteedosDXGrid

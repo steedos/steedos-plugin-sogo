@@ -1,31 +1,32 @@
 import { combineReducers } from 'redux'
 
 import organizations from '../containers/organizations/reducer'
-import users from '../containers/users/reducer'
+import entitiesReducer from './entities'
 import selectUser from '../containers/select_users/reducer'
-import store from '../stores/configureStore';
+import {DXGRID_STATE_CHANGE_ACTION} from '../actions/views/dx_grid'
 
 const combinedReducer = combineReducers({
     organizations,
-    users,
+    entities: entitiesReducer,
     selectUser
 })
 
 function crossSliceReducer(state: any, action: any) {
-    console.log('crossSliceReducer state', state);
-    // console.log('crossSliceReducer action', action);
-    if(action.type === 'ORGANIZATIONS__STATE_CHANGE'){
+    if (action.type === 'ORGANIZATIONS__STATE_CHANGE') {
 
     }
     switch (action.partialStateName) {
         case 'onClick': {
-            if(state.organizations.selectedNode.length > 0){
+            if (state.organizations.selectedNode.length > 0) {
                 return Object.assign({}, state, {
-                    users: users(state.users, {
-                        type: "USERS_STATE_CHANGE",
-                        partialStateName: "filters",
-                        partialStateValue: [{columnName: "organizations", value: state.organizations.selectedNode[0], operation: "equals"}],
-                    })
+                    entities: {
+                        space_users: (entitiesReducer(state.entities, {
+                            type: DXGRID_STATE_CHANGE_ACTION,
+                            partialStateName: "filters",
+                            partialStateValue: [{ columnName: "organizations", value: state.organizations.selectedNode[0], operation: "equals" }],
+                            objectName: 'space_users'
+                        })).space_users
+                    }
                 })
             }
             return state

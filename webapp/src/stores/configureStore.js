@@ -32,19 +32,21 @@ const initialStore = {
             return nodes
         }
     },
-    users: {
-        rows: [],
-        sorting: [],
-        grouping: [],
-        expandedGroups: [],
-        selection: [],
-        expandedRowIds: [1],
-        currentPage: 0,
-        pageSize: 10,
-        pageSizes: [5, 10, 15],
-        totalCount: 0,
-        columns: userListColumns,
-        getRowId: (row) => row.user
+    entities: {
+        space_users: {
+            rows: [],
+            sorting: [],
+            grouping: [],
+            expandedGroups: [],
+            selection: [],
+            expandedRowIds: [1],
+            currentPage: 0,
+            pageSize: 10,
+            pageSizes: [5, 10, 15],
+            totalCount: 0,
+            columns: userListColumns,
+            getRowId: (row) => row.user
+        }
     }
 }
 
