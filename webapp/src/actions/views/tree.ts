@@ -1,5 +1,4 @@
 import * as DataSource from '../../datasource'
-import { getEntityState } from '../../states/entitys';
 
 export const TREE_STATE_CHANGE_ACTION = 'TREE_STATE_CHANGE';
 

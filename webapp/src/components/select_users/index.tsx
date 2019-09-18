@@ -1,5 +1,5 @@
 import React from 'react';
-import { connect, Provider } from 'react-redux';
+import { connect } from 'react-redux';
 import DXGrid from '../../components/dx_grid'
 import SteedosTree from '../../components/tree'
 function SelectUsers() {

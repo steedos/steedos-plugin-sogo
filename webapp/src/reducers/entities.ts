@@ -17,6 +17,7 @@ function reducer(state: any = {}, action: any){
                 return transformEntityState(state, action);
             case 'filters': //TODO 优化此处代码，当filters发生编号时，如何抓取数据
                store.dispatch(loadEntitiesData(Object.assign({}, {...state[objectName], objectName: action.objectName, currentPage: state.currentPage, pageSize: state.pageSize, filters: action.partialStateValue })));
+               break;
             default:
                 break;
         }

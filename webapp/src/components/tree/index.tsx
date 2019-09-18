@@ -1,9 +1,8 @@
 
-import { connect, Provider } from 'react-redux';
+import { connect } from 'react-redux';
 import {createGridAction, loadEntitiesData} from '../../actions/views/tree'
 import { getEntityState } from '../../states/entitys'
 import SteedosTree from './salesforce_tree';
-import _ from 'underscore'
 
 function mapStateToProps() {
     return (state: any, ownProps: any) => {

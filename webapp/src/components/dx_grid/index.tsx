@@ -1,5 +1,4 @@
-import * as React from 'react';
-import { connect, Provider } from 'react-redux';
+import { connect } from 'react-redux';
 import SteedosDXGrid from './dx_grid';
 import { createGridAction, loadEntitiesData } from '../../actions/views/dx_grid'
 import { getEntityState } from '../../states/entitys'

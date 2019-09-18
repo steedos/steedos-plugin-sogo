@@ -1,6 +1,5 @@
 
 import { TREE_STATE_CHANGE_ACTION } from '../../actions/views/tree'
-import { getEntityState } from '../../states/entitys'
 import _ from 'underscore'
 
 
