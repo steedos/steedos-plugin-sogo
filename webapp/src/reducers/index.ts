@@ -10,28 +10,27 @@ const combinedReducer = combineReducers({
 
 function crossSliceReducer(state: any, action: any) {
     if (action.type === 'ORGANIZATIONS__STATE_CHANGE') {
-
-    }
-    switch (action.partialStateName) {
-        case 'onClick': {
-            let entityState = getEntityState(state, 'organizations')
-            if (entityState.selectedNode.length > 0) {
-                return Object.assign({}, state, {
-                    entities: {
-                        ...state.entities,
-                        space_users: (entitiesReducer(state.entities, {
-                            type: DXGRID_STATE_CHANGE_ACTION,
-                            partialStateName: "filters",
-                            partialStateValue: [{ columnName: "organizations", value: entityState.selectedNode[0], operation: "equals" }],
-                            objectName: 'space_users'
-                        })).space_users
-                    }
-                })
+        switch (action.partialStateName) {
+            case 'onClick': {
+                let entityState = getEntityState(state, 'organizations')
+                if (entityState.selectedNode.length > 0) {
+                    return Object.assign({}, state, {
+                        entities: {
+                            ...state.entities,
+                            space_users: (entitiesReducer(state.entities, {
+                                type: DXGRID_STATE_CHANGE_ACTION,
+                                partialStateName: "filters",
+                                partialStateValue: [{ columnName: "organizations", value: entityState.selectedNode[0], operation: "equals" }],
+                                objectName: 'space_users'
+                            })).space_users
+                        }
+                    })
+                }
+                return state
             }
-            return state
+            default:
+                return state
         }
-        default:
-            return state
     }
 }
 
