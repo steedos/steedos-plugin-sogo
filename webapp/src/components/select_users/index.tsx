@@ -1,6 +1,5 @@
 import React from 'react';
 import { connect, Provider } from 'react-redux';
-import store from '../../stores/configureStore'
 import DXGrid from '../../components/dx_grid'
 import SteedosTree from '../../components/tree'
 function SelectUsers() {
@@ -12,10 +11,4 @@ function SelectUsers() {
   );
 }
 
-const SelectUsersContainer: any = connect()(SelectUsers);
-
-export default () => (
-    <Provider store={store}>
-        <SelectUsersContainer />
-    </Provider>
-);
+export default connect()(SelectUsers);

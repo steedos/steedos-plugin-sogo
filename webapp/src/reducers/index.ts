@@ -1,13 +1,11 @@
 import { combineReducers } from 'redux'
 
 import entitiesReducer from './entities'
-import selectUser from '../containers/select_users/reducer'
 import {DXGRID_STATE_CHANGE_ACTION} from '../actions/views/dx_grid'
 import { getEntityState } from '../states/entitys'
 
 const combinedReducer = combineReducers({
-    entities: entitiesReducer,
-    selectUser
+    entities: entitiesReducer
 })
 
 function crossSliceReducer(state: any, action: any) {

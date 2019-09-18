@@ -1,13 +1,15 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
-
-import SelectUsers from './containers/select_users/'
+import { Provider } from 'react-redux';
+import store from './stores/configureStore'
+import SelectUsers from './components/select_users'
 
 function App() {
   return (
     <div className="App">
-      <SelectUsers />
+      <Provider store={store}>
+        <SelectUsers />
+      </Provider>
     </div>
   );
 }

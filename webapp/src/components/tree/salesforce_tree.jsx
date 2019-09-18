@@ -4,7 +4,7 @@ import Tree from '@salesforce/design-system-react/lib/components/tree/index.js';
 import log from '@salesforce/design-system-react/lib/utilities/log.js';
 import Search from '@salesforce/design-system-react/lib/components/forms/input/search.js';
 
-class SteedosTree extends React.Component {
+class SFTree extends React.Component {
 	static displayName = 'DemoTree';
 
 	static defaultProps = {
@@ -169,4 +169,4 @@ class SteedosTree extends React.Component {
 	}
 }
 
-export default SteedosTree
+export default SFTree
