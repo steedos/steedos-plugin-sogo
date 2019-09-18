@@ -13,9 +13,9 @@ import {
 
 
 class SteedosDXGrid extends React.Component {
-    constructor(props: any) {
-        super(props)
-    }
+    // constructor(props: any) {
+    //     super(props)
+    // }
 
     componentDidMount() {
         const { init } = this.props as any
