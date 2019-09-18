@@ -4,6 +4,7 @@ import organizations from '../containers/organizations/reducer'
 import entitiesReducer from './entities'
 import selectUser from '../containers/select_users/reducer'
 import {DXGRID_STATE_CHANGE_ACTION} from '../actions/views/dx_grid'
+import { getEntityState } from '../states/entitys'
 
 const combinedReducer = combineReducers({
     organizations,
@@ -17,13 +18,15 @@ function crossSliceReducer(state: any, action: any) {
     }
     switch (action.partialStateName) {
         case 'onClick': {
-            if (state.organizations.selectedNode.length > 0) {
+            let entityState = getEntityState(state, 'organizations')
+            if (entityState.selectedNode.length > 0) {
                 return Object.assign({}, state, {
                     entities: {
+                        ...state.entities,
                         space_users: (entitiesReducer(state.entities, {
                             type: DXGRID_STATE_CHANGE_ACTION,
                             partialStateName: "filters",
-                            partialStateValue: [{ columnName: "organizations", value: state.organizations.selectedNode[0], operation: "equals" }],
+                            partialStateValue: [{ columnName: "organizations", value: entityState.selectedNode[0], operation: "equals" }],
                             objectName: 'space_users'
                         })).space_users
                     }

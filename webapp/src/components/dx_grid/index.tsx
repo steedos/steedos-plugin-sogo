@@ -6,11 +6,11 @@ import { getEntityState } from '../../states/entitys'
 import _ from 'underscore'
 // const mapStateToProps = (state: any) => state;
 
-function mapStateToProps(){
+function mapStateToProps() {
   return (state: any, ownProps: any) => {
     let entityState = getEntityState(state, ownProps.objectName)
-    return Object.assign(entityState, {objectName: ownProps.objectName, $select: _.pluck(entityState.columns, 'name')});
-};
+    return Object.assign(entityState, { objectName: ownProps.objectName, $select: _.pluck(entityState.columns, 'name') });
+  };
 }
 
 const mapDispatchToProps = (dispatch: any, ownProps: any) => ({

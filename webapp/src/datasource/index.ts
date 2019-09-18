@@ -21,7 +21,7 @@ export async function query(options: any = {pageSize: 10, currentPage: 0}){
     }
     if(options.filters){
         options.filters.forEach((element: any) => {
-            query = query.filter(p => p[element.operation](element.columnName, element.value));
+            query = query.filter((p: any) => p[element.operation](element.columnName, element.value));
         });
     }
     let results = await query.getManyAsync();

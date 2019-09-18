@@ -1,8 +1,7 @@
 import { createStore, applyMiddleware } from 'redux'
 import thunkMiddleware from 'redux-thunk'
 import rootReducer from '../reducers'
-
-import { getOrganizationsState } from '../containers/organizations/state'
+import { getEntityState } from '../states/entitys'
 const userListColumns = [
     { name: 'user', title: 'userId' },
     { name: 'name', title: 'name' },
@@ -12,26 +11,6 @@ const userListColumns = [
     { name: 'position', title: 'position' }
 ];
 const initialStore = {
-    organizations: {
-        id: "organizations-tree",
-        noHeading: true,
-        rootNodes: ["51ae9b1a8e296a29c9000002"],
-        nodes: [],
-        selectedNode: [],
-        getNodes: function(node){
-            if(!node.nodes){
-                return []
-            }
-            let nodes = []
-            let stateNodes = getOrganizationsState(store.getState()).nodes
-            node.nodes.forEach((element) => {
-                if(stateNodes[element]){
-                    nodes.push(stateNodes[element])
-                }
-            });
-            return nodes
-        }
-    },
     entities: {
         space_users: {
             rows: [],
@@ -46,6 +25,28 @@ const initialStore = {
             totalCount: 0,
             columns: userListColumns,
             getRowId: (row) => row.user
+        },
+        organizations: {
+            id: "organizations-tree",
+            noHeading: true,
+            rootNodes: ["51ae9b1a8e296a29c9000002"],
+            nodes: [],
+            selectedNode: [],
+            pageSize: 1000000,
+            $select: ['_id', 'name', 'fullname', 'children'],
+            getNodes: function(node){
+                if(!node.nodes){
+                    return []
+                }
+                let nodes = []
+                let stateNodes = getEntityState(store.getState(), 'organizations').nodes
+                node.nodes.forEach((element) => {
+                    if(stateNodes[element]){
+                        nodes.push(stateNodes[element])
+                    }
+                });
+                return nodes
+            }
         }
     }
 }

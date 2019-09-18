@@ -1,5 +1,7 @@
 
 import { DXGRID_STATE_CHANGE_ACTION, loadEntitiesData } from '../actions/views/dx_grid'
+import { TREE_STATE_CHANGE_ACTION } from '../actions/views/tree'
+import TreeReducer from './views/tree'
 import store from '../stores/configureStore';
 
 function transformEntityState(state: any, action: any){
@@ -19,6 +21,8 @@ function reducer(state: any = {}, action: any){
                 break;
         }
         return Object.assign({}, state, {[objectName]: {...state[objectName], [action.partialStateName]: action.partialStateValue}});
+    }else if(action.type === TREE_STATE_CHANGE_ACTION){
+        return TreeReducer(state, action)
     }
 
     return state;
