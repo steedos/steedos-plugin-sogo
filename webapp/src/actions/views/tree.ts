@@ -11,7 +11,6 @@ export const createGridAction = (partialStateName: any, partialStateValue: any, 
 
 
 export function loadEntitiesData(options: any) {
-    console.log('tree load ', options);
     return function (dispatch: any) {
         return loadData(options).then(
             (sauce) => dispatch(loadDataSauce(sauce, options.objectName)),

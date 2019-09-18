@@ -14,12 +14,10 @@ import {
 
 class SteedosDXGrid extends React.Component {
     constructor(props: any) {
-        console.log("constructor constructor this.props", props);
         super(props)
     }
 
     componentDidMount() {
-        console.log("componentDidMount componentDidMount this.props", this.props);
         const { init } = this.props as any
         init(this.props)
     }

@@ -8,7 +8,6 @@ import _ from 'underscore'
  * @param records 待转换的数据
  */
 function transformData(records: any){
-	console.log("transformData records", records);
     let items: any = {}
     records.forEach((element: any) => {
         let item: any= {id: element._id, label: element.name}
