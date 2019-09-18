@@ -1,13 +1,11 @@
 import { combineReducers } from 'redux'
 
-import organizations from '../containers/organizations/reducer'
 import entitiesReducer from './entities'
 import selectUser from '../containers/select_users/reducer'
 import {DXGRID_STATE_CHANGE_ACTION} from '../actions/views/dx_grid'
 import { getEntityState } from '../states/entitys'
 
 const combinedReducer = combineReducers({
-    organizations,
     entities: entitiesReducer,
     selectUser
 })

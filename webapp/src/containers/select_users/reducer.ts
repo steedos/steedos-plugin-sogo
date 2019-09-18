@@ -1,5 +1,3 @@
-import { ORGANIZATIONS__STATE_CHANGE_ACTION } from '../organizations/action'
-// import { SELECTUSERS_STATE_CHANGE_ACTION } from './action'
 
 function reducer(state: any = {}, action: any){
     // console.log("selectusers.reducer state", state)

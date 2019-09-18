@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect, Provider } from 'react-redux';
 import store from '../../stores/configureStore'
-import Organizations from '../organizations/'
 import DXGrid from '../../components/dx_grid'
 import SteedosTree from '../../components/tree'
 function SelectUsers() {
