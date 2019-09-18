@@ -14,7 +14,11 @@ export async function query(options: any = {pageSize: 10, currentPage: 0}){
         }
     }
     const baseQuery = Odata.ODataV4QueryProvider.createQuery<any>(endpoint, requestInit);
-    let query = baseQuery.top(pageSize || 10).skip(skip || 0)
+    let query = baseQuery.skip(skip || 0)
+
+    if(pageSize){
+        query = query.top(pageSize)
+    }
 
     if($select){
         query = query.select(...$select)

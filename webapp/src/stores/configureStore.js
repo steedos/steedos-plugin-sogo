@@ -32,7 +32,6 @@ const initialStore = {
             rootNodes: ["51ae9b1a8e296a29c9000002"],
             nodes: [],
             selectedNode: [],
-            pageSize: 1000000,
             $select: ['_id', 'name', 'fullname', 'children'],
             getNodes: function(node){
                 if(!node.nodes){
