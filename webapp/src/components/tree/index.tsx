@@ -6,8 +6,8 @@ import SteedosTree from './salesforce_tree';
 
 function mapStateToProps() {
     return (state: any, ownProps: any) => {
-      let entityState = getEntityState(state, ownProps.objectName)
-      return Object.assign(entityState, { objectName: ownProps.objectName });
+      let entityState = getEntityState(state, ownProps.objectName) || {}
+      return Object.assign(entityState, { ...ownProps });
     };
   }
 

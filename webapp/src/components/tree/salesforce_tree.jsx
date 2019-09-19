@@ -3,14 +3,32 @@ import IconSettings from '@salesforce/design-system-react/components/icon-settin
 import Tree from '@salesforce/design-system-react/lib/components/tree/index.js';
 import log from '@salesforce/design-system-react/lib/utilities/log.js';
 import Search from '@salesforce/design-system-react/lib/components/forms/input/search.js';
+import PropTypes from 'prop-types';
 
 class SFTree extends React.Component {
-	static displayName = 'DemoTree';
+
+	constructor(props) {
+		super(props)
+		if(!this.props.id){
+			this.id = `${this.props.objectName}-tree`
+		}
+    }
 
 	static defaultProps = {
-		heading: 'Miscellaneous Foods',
-		id: 'example-tree',
+		heading: 'Tree',
+		noHeading: true,
+		nodes: [],
+		selectedNode: []
 	};
+
+	static propTypes = {
+		objectName: PropTypes.string.isRequired,
+		rootNodes: PropTypes.array.isRequired,
+		$select: PropTypes.array.isRequired,
+		getNodes: PropTypes.func.isRequired,
+		id: PropTypes.string
+    }
+
 	componentDidMount() {
 		if(this.props.init){
 			this.props.init(this.props)
@@ -153,7 +171,7 @@ class SFTree extends React.Component {
 						className={className}
 						getNodes={getNodes || this.getNodes}
 						heading={!noHeading && this.props.heading}
-						id={id}
+						id={id || this.id}
 						listStyle={listStyle}
 						listClassName={listClassName}
 						// nodes={this.state.nodes["0"].nodes}

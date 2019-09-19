@@ -1,6 +1,6 @@
 import * as React from 'react';
 import Paper from '@material-ui/core/Paper';
-
+import PropTypes from 'prop-types';
 import {
     SortingState, SelectionState, PagingState, RowDetailState,SearchState,IntegratedFiltering,
     IntegratedSorting, IntegratedSelection, CustomPaging
@@ -16,6 +16,28 @@ class SteedosDXGrid extends React.Component {
     // constructor(props: any) {
     //     super(props)
     // }
+    static defaultProps = {
+        rows: [],
+        sorting: [],
+        grouping: [],
+        expandedGroups: [],
+        selection: [],
+        expandedRowIds: [1],
+        currentPage: 0,
+        pageSize: 10,
+        pageSizes: [5, 10, 15],
+        totalCount: 0,
+    };
+
+    static propTypes = {
+        objectName: PropTypes.string.isRequired,
+        columns: PropTypes.array.isRequired,
+        getRowId: PropTypes.func.isRequired,
+        $select: PropTypes.array,
+        currentPage: PropTypes.number,
+        pageSize: PropTypes.number,
+        pageSizes: PropTypes.array
+    }
 
     componentDidMount() {
         const { init } = this.props as any

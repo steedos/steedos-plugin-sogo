@@ -27,7 +27,7 @@ function transformData(records: any){
 function reducer(state:any = {}, action: any){
     if (action.type === TREE_STATE_CHANGE_ACTION) {
         let objectName = action.objectName;
-        let entityState = state[objectName];
+        let entityState = state[objectName] || {};
 		let value = action.partialStateValue
 		let nodeId: string = value.node? value.node.id : ""
         switch (action.partialStateName) {
@@ -35,7 +35,7 @@ function reducer(state:any = {}, action: any){
                 entityState.nodes[value.node.id]["expanded"] = value.expand
                 break;
             case 'onClick':
-				let selectedNodeIds = entityState.selectedNode
+				let selectedNodeIds = entityState.selectedNode || []
 				if(selectedNodeIds.length > 0){
 					(entityState.nodes[selectedNodeIds[0]] as any).selected = false
 				}

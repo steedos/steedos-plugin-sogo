@@ -7,8 +7,14 @@ import _ from 'underscore'
 
 function mapStateToProps() {
   return (state: any, ownProps: any) => {
-    let entityState = getEntityState(state, ownProps.objectName)
-    return Object.assign(entityState, { objectName: ownProps.objectName, $select: _.pluck(entityState.columns, 'name') });
+    let objectName = ownProps.objectName
+    let entityState = getEntityState(state, objectName) || {}
+    let columns = entityState.columns;
+    if(ownProps.columns){
+      columns = ownProps.columns
+    }
+    let $select = _.pluck(columns, 'name')
+    return Object.assign(entityState, {...entityState, objectName, $select, ...ownProps});
   };
 }
 

@@ -2,7 +2,6 @@
 import { DXGRID_STATE_CHANGE_ACTION, loadEntitiesData } from '../actions/views/dx_grid'
 import { TREE_STATE_CHANGE_ACTION } from '../actions/views/tree'
 import TreeReducer from './views/tree'
-import { getEntityState } from '../states/entitys'
 import store from '../stores/configureStore';
 
 function transformEntityState(state: any, action: any){
