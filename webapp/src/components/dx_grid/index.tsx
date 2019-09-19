@@ -13,8 +13,14 @@ function mapStateToProps() {
     if(ownProps.columns){
       columns = ownProps.columns
     }
+
+    let pageSize = entityState.pageSize;
+    if(!pageSize){
+      pageSize = ownProps.pageSize || 10
+    }
+
     let $select = _.pluck(columns, 'name')
-    return Object.assign(entityState, {...entityState, objectName, $select, ...ownProps});
+    return Object.assign(entityState, {...entityState, objectName, $select, ...ownProps, pageSize});
   };
 }
 

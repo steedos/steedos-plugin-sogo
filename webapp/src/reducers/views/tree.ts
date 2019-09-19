@@ -7,13 +7,13 @@ import _ from 'underscore'
  * return: {id: {label: ,type: , id}}
  * @param records 待转换的数据
  */
-function transformData(records: any){
+function transformData(records: any) {
     let items: any = {}
     records.forEach((element: any) => {
-        let item: any= {id: element._id, label: element.name}
-        if( _.isEmpty(element.children)){
+        let item: any = { id: element._id, label: element.name }
+        if (_.isEmpty(element.children)) {
             item.type = 'item'
-        }else{
+        } else {
             item.type = 'branch'
             item.nodes = element.children
         }
@@ -24,34 +24,33 @@ function transformData(records: any){
 
 
 //TODO: 优化onExpandClick，onClick
-function reducer(state:any = {}, action: any){
+function reducer(state: any = {}, action: any) {
     if (action.type === TREE_STATE_CHANGE_ACTION) {
-        let objectName = action.objectName;
-        let entityState = state[objectName] || {};
-		let value = action.partialStateValue
-		let nodeId: string = value.node? value.node.id : ""
+        let value = action.partialStateValue
+        let nodeId: string = value.node ? value.node.id : ""
         switch (action.partialStateName) {
             case 'onExpandClick':
-                entityState.nodes[value.node.id]["expanded"] = value.expand
+                state.nodes[value.node.id]["expanded"] = value.expand
                 break;
             case 'onClick':
-				let selectedNodeIds = entityState.selectedNode || []
-				if(selectedNodeIds.length > 0){
-					(entityState.nodes[selectedNodeIds[0]] as any).selected = false
-				}
-                let selected = value.select ? true : value.node.selected
-				entityState.nodes[nodeId]["selected"] = selected
-				if(selected){
-					entityState.selectedNode = [nodeId]
+                let selectedNodeIds = state.selectedNode || []
+                if (selectedNodeIds.length > 0) {
+                    (state.nodes[selectedNodeIds[0]] as any).selected = false
                 }
-				break;
-			case 'loadDataSauce':
-                return Object.assign({}, state, {[objectName]: {...state[objectName], nodes: transformData(action.partialStateValue.records), totalCount: action.partialStateValue.totalCount}});
+                let selected = value.select ? true : value.node.selected
+                state.nodes[nodeId]["selected"] = selected
+                if (selected) {
+                    state.selectedNode = [nodeId]
+                }
+                break;
+            case 'loadDataSauce':
+                return Object.assign({}, state, { nodes: transformData(action.partialStateValue.records), totalCount: action.partialStateValue.totalCount });
             default:
                 break;
         }
-        return Object.assign({}, state, {[objectName]: {...state[objectName], [action.partialStateName]: action.partialStateValue}});
-        
+        console.log('tree reducer', Object.assign({}, state, { [action.partialStateName]: action.partialStateValue }));
+        return Object.assign({}, state, { [action.partialStateName]: action.partialStateValue });
+
     }
     return state;
 };
