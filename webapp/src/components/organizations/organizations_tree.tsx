@@ -18,7 +18,7 @@ class OrganizationsTree extends React.Component {
     render() {
         //Tree props
         let { rootNodes } = this.props as any
-        let $select_org = ['_id', 'name', 'fullname', 'children']
+        let $selectOrg = ['_id', 'name', 'fullname', 'children']
         let getNodes = function(node: any){
             if(!node.nodes){
                 return []
@@ -34,7 +34,7 @@ class OrganizationsTree extends React.Component {
             return nodes
         }
         return (
-            <SteedosTree objectName='organizations' rootNodes={rootNodes} $select={$select_org} getNodes={getNodes}/>
+            <SteedosTree objectName='organizations' rootNodes={rootNodes} $select={$selectOrg} getNodes={getNodes}/>
         )
     }
 }
