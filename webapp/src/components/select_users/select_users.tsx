@@ -1,9 +1,7 @@
 import * as React from 'react';
 import DXGrid from '../../components/dx_grid'
-import SteedosTree from '../../components/tree'
+import OrganizationsTree from '../../components/organizations'
 import PropTypes from 'prop-types';
-import { getEntityState } from '../../states/entitys'
-import store from '../../stores/configureStore'
 
 class SelectUsers extends React.Component {
     static defaultProps = {
@@ -30,25 +28,9 @@ class SelectUsers extends React.Component {
 
         //Tree props
         let { rootNodes } = this.props as any
-        let $select_org = ['_id', 'name', 'fullname', 'children']
-        let getNodes = function(node: any){
-            if(!node.nodes){
-                return []
-            }
-            let entityState = getEntityState(store.getState(), 'organizations') || {}
-            let nodes: any = []
-            let stateNodes = entityState.nodes || []
-            node.nodes.forEach((element: any) => {
-                if(stateNodes[element]){
-                    nodes.push(stateNodes[element])
-                }
-            });
-            return nodes
-        }
-
         return (
             <div className="slds-grid">
-                <div className="left"><SteedosTree objectName='organizations' rootNodes={rootNodes} $select={$select_org} getNodes={getNodes}/></div>
+                <div className="left"><OrganizationsTree rootNodes={rootNodes}/></div>
                 <div className="right"><DXGrid objectName='space_users' columns={userListColumns} getRowId={getRowId} /></div>
             </div>
         )
