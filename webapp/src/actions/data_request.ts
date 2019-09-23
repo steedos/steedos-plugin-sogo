@@ -1,4 +1,5 @@
 import * as DataSource from '../datasource'
+import { createGridAction } from './base'
 
 export function loadEntitiesDataRequest(dispatch: any, actionType: string, dataService: string, options: any) {
     return loadData(dataService, options).then(
@@ -14,18 +15,13 @@ async function loadData(dataService: string, options: any) {
 function loadDataSauce(actionType: string, results: any, objectName: string) {
     let records = results.value
     let totalCount = results["@odata.count"] || 0
+    records = records.map((item: any)=>{
+        item.id = item._id
+        return item
+    })
     return createGridAction(actionType, 'loadDataSauce', {records, totalCount}, objectName)
 }
 
 function loadDataError(actionType: string, error: any, objectName: string) {
     return createGridAction(actionType, 'loadDataError', {error: error}, objectName)
-}
-
-export function createGridAction(actionType: string, partialStateName: any, partialStateValue: any, objectName: string) {
-    return {
-        type: actionType,
-        partialStateName,
-        partialStateValue,
-        objectName
-    }
 }

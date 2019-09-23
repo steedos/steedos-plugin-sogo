@@ -1,16 +1,15 @@
-import { loadEntitiesDataRequest } from '../data_request'
 import states from '../../states';
+import { loadEntitiesDataRequest } from '../data_request'
 import { createGridAction as baseCreateGridAction } from '../base'
-export const TREE_STATE_CHANGE_ACTION = 'TREE_STATE_CHANGE';
+export const LOOKUP_STATE_CHANGE_ACTION = 'LOOKUP_STATE_CHANGE';
 
 export const createGridAction = (partialStateName: any, partialStateValue: any, objectName: string) => {
-    return baseCreateGridAction(TREE_STATE_CHANGE_ACTION, partialStateName, partialStateValue, objectName);
+    return baseCreateGridAction(LOOKUP_STATE_CHANGE_ACTION, partialStateName, partialStateValue, objectName);
 }
-
 
 export function loadEntitiesData(options: any) {
     return function (dispatch: any, getState: any) {
         const service = states.getDataServices(getState())
-        return loadEntitiesDataRequest(dispatch, TREE_STATE_CHANGE_ACTION, service, options)
+        return loadEntitiesDataRequest(dispatch, LOOKUP_STATE_CHANGE_ACTION, service, options)
     };
 }

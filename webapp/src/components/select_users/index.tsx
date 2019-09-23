@@ -1,4 +1,4 @@
 import { connect } from 'react-redux';
-import SelectUsers from './select_users'
+import SelectUsers from './salesforce_select_users'
 
 export default connect()(SelectUsers);
