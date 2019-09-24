@@ -155,34 +155,32 @@ class SFTree extends React.Component {
 		const {assistiveText, className, getNodes, noHeading, id, listStyle, listClassName, rootNodes, searchTerm, onExpandClick, onClick, onScroll} = this.props;
 		return (
 			<IconSettings iconPath="/icons">
-				<div style={{width: 400}}>
-					{this.props.searchable ? (
-						<div>
-							<Search
-								assistiveText={{ label: 'Search Tree' }}
-								id="example-search"
-								value={this.state.searchTerm}
-								onChange={this.handleSearchChange}
-							/>
-							<br />
-						</div>
-					) : null}
-					<Tree
-						assistiveText={assistiveText}
-						className={className}
-						getNodes={getNodes || this.getNodes}
-						heading={!noHeading && this.props.heading}
-						id={id || this.id}
-						listStyle={listStyle}
-						listClassName={listClassName}
-						// nodes={this.state.nodes["0"].nodes}
-						nodes={rootNodes}
-						onExpandClick={onExpandClick || this.handleExpandClick}
-						onClick={onClick || this.handleClick}
-						onScroll={onScroll || this.handleScroll}
-						searchTerm={searchTerm || this.state.searchTerm}
-					/>
-				</div>
+				{this.props.searchable ? (
+					<div>
+						<Search
+							assistiveText={{ label: 'Search Tree' }}
+							id="example-search"
+							value={this.state.searchTerm}
+							onChange={this.handleSearchChange}
+						/>
+						<br />
+					</div>
+				) : null}
+				<Tree
+					assistiveText={assistiveText}
+					className={className}
+					getNodes={getNodes || this.getNodes}
+					heading={!noHeading && this.props.heading}
+					id={id || this.id}
+					listStyle={listStyle}
+					listClassName={listClassName}
+					// nodes={this.state.nodes["0"].nodes}
+					nodes={rootNodes}
+					onExpandClick={onExpandClick || this.handleExpandClick}
+					onClick={onClick || this.handleClick}
+					onScroll={onScroll || this.handleScroll}
+					searchTerm={searchTerm || this.state.searchTerm}
+				/>
 			</IconSettings>
 		);
 	}

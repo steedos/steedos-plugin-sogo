@@ -15,6 +15,7 @@
     "@types/react": "^16.8.19",
     "@types/react-dom": "^16.8.4",
     "@types/react-redux": "^7.1.2",
+    "@types/styled-components": "^4.1.19",
     "@types/underscore": "^1.9.2",
     "prop-types": "^15.7.2",
     "react": "^16.9.0",
@@ -23,6 +24,7 @@
     "react-scripts": "3.1.1",
     "redux": "^4.0.4",
     "redux-thunk": "^2.3.0",
+    "styled-components": "^4.4.0",
     "ts-odata-client": "^1.0.2",
     "typescript": "^3.6.2",
     "underscore": "^1.9.1"

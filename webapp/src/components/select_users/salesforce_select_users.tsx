@@ -3,6 +3,25 @@ import Grid from '../../components/grid'
 import OrganizationsTree from '../../components/organizations'
 import PropTypes from 'prop-types';
 import { createGridAction } from '../../actions/views/grid';
+import styled from 'styled-components'
+
+let Counter = styled.div`
+    display: flex;
+`
+let OrgsCounter = styled.div`
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    width: 18rem;
+    overflow: auto;
+`
+
+let UsersCounter = styled.div`
+    margin-left: 18rem;
+`
+
 
 class SelectUsers extends React.Component {
     static defaultProps = {
@@ -41,10 +60,10 @@ class SelectUsers extends React.Component {
         //Tree props
         let { rootNodes } = this.props as any
         return (
-            <div className="slds-grid">
-                <div className="left"><OrganizationsTree rootNodes={rootNodes} onClickFunc={onClick}/></div>
-                <div className="right"><Grid pageSize={200} objectName='space_users' columns={userListColumns} getRowId={getRowId} /></div>
-            </div>
+            <Counter className="select-users">
+                <OrgsCounter className="organizations"><OrganizationsTree rootNodes={rootNodes} onClickFunc={onClick}/></OrgsCounter>
+                <UsersCounter className="users"><Grid pageSize={200} objectName='space_users' columns={userListColumns} getRowId={getRowId} /></UsersCounter>
+            </Counter>
         )
     }
 }

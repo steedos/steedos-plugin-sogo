@@ -4,7 +4,8 @@ import PropTypes from 'prop-types';
 
 class OrganizationsTree extends React.Component {
     static defaultProps = {
-        valueField: '_id'
+        valueField: '_id',
+        width: '300px'
     }
 
     static propTypes = {
