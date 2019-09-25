@@ -11,3 +11,24 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+
+.select-users .organizations{
+  border-right: 1px solid #D5D5D5;
+}
+
+.select-users .organizations, .select-users .users .slds-grid_vertical{
+  margin-bottom: 49px;
+}
+
+.select-users .users #combobox-base-selected-listbox{
+  max-height: 100px;
+  overflow-y: auto;
+}
+
+.slds-docked-form-footer{
+  justify-content: flex-end;
+  padding-right: 30px;
+  box-shadow: none;
+  border-top: 1px solid #D5D5D5;
+}
